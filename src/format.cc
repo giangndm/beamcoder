@@ -4944,7 +4944,6 @@ napi_value getStreamAttachedPic(napi_env env, napi_callback_info info) {
   napi_status status;
   napi_value result;
   AVStream* stream;
-  packetData* pd = new packetData;
 
   status = napi_get_cb_info(env, info, 0, nullptr, nullptr, (void**) &stream);
   CHECK_STATUS;
@@ -4953,6 +4952,7 @@ napi_value getStreamAttachedPic(napi_env env, napi_callback_info info) {
     status = napi_get_null(env, &result);
     CHECK_STATUS;
   } else {
+    packetData* pd = new packetData;
     pd->packet = &stream->attached_pic;
     status = fromAVPacket(env, pd, &result);
     CHECK_STATUS;

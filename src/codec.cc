@@ -7263,6 +7263,7 @@ void codecContextFinalizer(napi_env env, void* data, void* hint) {
   }
   avcodec_close(codecCtx);
   avcodec_free_context(&codecCtx);
+  free(encodingRef);
 }
 
 napi_status fromAVCodecDescriptor(napi_env env, const AVCodecDescriptor* codecDesc,

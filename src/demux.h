@@ -59,6 +59,7 @@ struct demuxerCarrier : carrier {
   AVInputFormat* iformat = nullptr;
   AVDictionary* options = nullptr;
   ~demuxerCarrier() {
+    if (filename != nullptr) { free((char*)filename); }
     if (format != nullptr) { avformat_close_input(&format); }
     if (options != nullptr) { av_dict_free(&options); }
   }
