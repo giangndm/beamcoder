@@ -205,7 +205,6 @@ void encodeExecute(napi_env env, void* data) {
     ret = avcodec_receive_packet(c->encoder, packet);
     if (ret == 0) {
       c->packets.push_back(packet);
-      packet = av_packet_alloc();
     } else {
       //printf("Receive packet got status %i\n", ret);
     }

@@ -222,7 +222,6 @@ void decodeExecute(napi_env env, void* data) {
     ret = avcodec_receive_frame(c->decoder, frame);
     if (ret == 0) {
       c->frames.push_back(frame);
-      frame = av_frame_alloc();
     }
   } while (ret == 0);
   av_frame_free(&frame);

@@ -1509,8 +1509,10 @@ void filterExecute(napi_env env, void* data) {
         return;
       }
       ret = av_buffersink_get_frame(sinkCtx, filtFrame);
-      if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
+      if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
+        av_frame_free(&filtFrame);
         break;
+      }
       if (ret < 0) {
         c->status = BEAMCODER_ERROR_FILTER_GET_FRAME;
         c->errorMsg = "Error while filtering.";
